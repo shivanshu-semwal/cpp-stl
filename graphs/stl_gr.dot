@@ -1,0 +1,41 @@
+digraph{
+    node[shape="square";  fontname="Handlee"]
+
+    isorder[label="Is order important?"; shape="diamond"]
+    lifo[label="last in first out"; shape="diamond"] 
+    fifo[label="first in first out"; shape="diamond"]
+    
+    allow[label="Allow duplicates?"; shape="diamond"]
+
+    stack[label="stack"; color="#393B44"; style=filled; fillcolor="#A2D5F2";]
+    queue[label="queue"; color="#393B44"; style=filled; fillcolor="#A2D5F2";]
+    pri_queue[label="priority_queue"; color="#393B44"; style=filled; fillcolor="#A2D5F2";]
+
+    unordered_map[label="unordered_map"; color="#393B44"; style=filled; fillcolor="#A2D5F2";]
+    unordered_set[label="unordered_set"; color="#393B44"; style=filled; fillcolor="#A2D5F2";]
+    unordered_multimap[label="unordered_multimap"; color="#393B44"; style=filled; fillcolor="#A2D5F2";]
+    unordered_multiset[label="unordered_multiset"; color="#393B44"; style=filled; fillcolor="#A2D5F2";]
+
+    map_k_v[label="Map key to value"; shape="diamond"]
+    map_k_v2[label="Map key to value"; shape="diamond"]
+    
+    isorder -> lifo[label="Yes"]
+    lifo -> stack[label="Yes"]
+    lifo -> fifo[label="No"]
+    fifo -> pri_queue[label="No"]
+    fifo -> queue[label="Yes"]
+    {
+        { rank=same; fifo lifo isorder };
+    }
+
+
+    isorder -> allow[label="No"]
+    
+    allow -> map_k_v[label="No"]
+    map_k_v -> unordered_map[label="Yes"]
+    map_k_v -> unordered_set[label="No"]
+
+    allow -> map_k_v2[label="Yes"]
+    map_k_v2 -> unordered_multimap[label="Yes"]
+    map_k_v2 -> unordered_multiset[label="No"]
+}

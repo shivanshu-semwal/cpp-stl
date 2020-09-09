@@ -1,0 +1,52 @@
+digraph{
+    graph [fontname = "Handlee"];
+    node[shape="box";  fontname="Handlee"]
+    edge[fontname="Handlee"]
+    isorder[label="Is order important?"; shape="Mdiamond"]
+    
+    subgraph cluster_0{
+        style=filled;
+        color=lightgrey;
+        shape="box";
+        lifo[label="last in first out"; shape="diamond"] ;
+        fifo[label="first in first out"; shape="diamond"];
+        stack[label="stack"; color="#FF0000"; style=filled; fillcolor="#A2D5F2";];
+        queue[label="queue"; color="#FF0000"; style=filled; fillcolor="#A2D5F2";];
+        pri_queue[label="priority_queue"; color="#FF0000"; style=filled; fillcolor="#A2D5F2";];
+
+        lifo -> stack[label="Yes"];
+        lifo -> fifo[label="No"];
+        fifo -> pri_queue[label="No"];
+        fifo -> queue[label="Yes"];
+
+        label="*Adaptive Containers*";
+    }
+    
+    
+    subgraph cluster_1{
+        style=filled;
+        color="#ffecb3";
+
+        allow[label="Allow duplicates?"; shape="diamond"];
+        unordered_map[label="unordered_map"; color="#FF0000"; style=filled; fillcolor="#A2D5F2";];
+        unordered_set[label="unordered_set"; color="#FF0000"; style=filled; fillcolor="#A2D5F2";];
+        unordered_multimap[label="unordered_multimap"; color="#FF0000"; style=filled; fillcolor="#A2D5F2";];
+        unordered_multiset[label="unordered_multiset"; color="#FF0000"; style=filled; fillcolor="#A2D5F2";];
+
+        map_k_v[label="Map key to value"; shape="diamond"];
+        map_k_v2[label="Map key to value"; shape="diamond"];
+
+        allow -> map_k_v[label="No"];
+        map_k_v -> unordered_map[label="Yes"];
+        map_k_v -> unordered_set[label="No"];
+
+        allow -> map_k_v2[label="Yes"];
+        map_k_v2 -> unordered_multimap[label="Yes"];
+        map_k_v2 -> unordered_multiset[label="No"];
+
+        label="*Unordered Containers*";
+    }
+
+    isorder -> lifo[label="Yes"]
+    isorder -> allow[label="No"]
+}
